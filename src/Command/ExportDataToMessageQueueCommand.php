@@ -14,18 +14,19 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class ExportDataToMessageQueueCommand extends Command
 {
-    use ContainerAwareTrait;
-
     /** @var ExporterRegistry */
     private $exporterRegistry;
+    /** @var ContainerInterface */
+    private $container;
 
-    public function __construct(ExporterRegistry $exporterRegistry)
+    public function __construct(ExporterRegistry $exporterRegistry, ContainerInterface $container)
     {
         $this->exporterRegistry = $exporterRegistry;
+        $this->container = $container;
 
         parent::__construct();
     }

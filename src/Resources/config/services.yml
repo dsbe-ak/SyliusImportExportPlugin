@@ -146,8 +146,7 @@ services:
         class: FriendsOfSylius\SyliusImportExportPlugin\Command\ImportDataFromMessageQueueCommand
         arguments:
             - "@sylius.importers_registry"
-        calls:
-            - [ setContainer, ["@service_container"]]
+            - "@service_container"
         tags:
             - { name: 'console.command' }
 
@@ -155,8 +154,7 @@ services:
         class: FriendsOfSylius\SyliusImportExportPlugin\Command\ExportDataCommand
         arguments:
             - "@sylius.exporters_registry"
-        calls:
-            - [ setContainer, ["@service_container"]]
+            - "@service_container"
         tags:
             - { name: 'console.command' }
 
@@ -164,8 +162,7 @@ services:
         class: FriendsOfSylius\SyliusImportExportPlugin\Command\ExportDataToMessageQueueCommand
         arguments:
             - "@sylius.exporters_registry"
-        calls:
-            - [ setContainer, ["@service_container"]]
+            - "@service_container"
         tags:
             - { name: 'console.command' }
 
