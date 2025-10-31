@@ -47,7 +47,7 @@ final class ExportDataToMessageQueueCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string $exporter */
         $exporter = $input->getArgument('exporter');
@@ -55,7 +55,7 @@ final class ExportDataToMessageQueueCommand extends Command
         if (empty($exporter)) {
             $this->listExporters($input, $output);
 
-            return;
+            return 0;
         }
 
         $domain = 'sylius';
@@ -83,6 +83,8 @@ final class ExportDataToMessageQueueCommand extends Command
         $mqItemWriter = $this->container->get('sylius.message_queue_writer');
         $this->export($mqItemWriter, $name, $idsToExport, $exporter);
         $this->finishExport($items, 'message queue', $name, $output);
+
+        return 0;
     }
 
     private function listExporters(InputInterface $input, OutputInterface $output, ?string $errorMessage = null): void
